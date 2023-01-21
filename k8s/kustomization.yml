@@ -9,4 +9,4 @@ namespace: appgo
 images:
 - name: 0xdutra/argo-appgo
   newName: 0xdutra/argo-appgo
-  newTag: 1f535b6153f25ac5e1546f4ccee9e9f02ffc3c79
+  newTag: 6f6628f35b755283a8aa0c04649bac61a783882b
