@@ -1,0 +1,22 @@
+name: CD
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: build image and push to docker hub
+        uses: docker/build-push-actions@v1.1.0
+        with:
+          username: 0xdutra
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: 0xdutra/argo-appgo
+          tags: ${{ github.sha }}, latest
+

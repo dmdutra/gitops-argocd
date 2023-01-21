@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-appgo
+  labels:
+    app: argo-appgo
+spec:
+  selector:
+    matchLabels:
+      app: argo-appgo
+  template:
+    metadata:
+      labels:
+        app: argo-appgo
+    spec:
+      containers:
+      - name: argo-appgo
+        image: 0xdutra/argo-appgo:latest
+        ports:
+        - containerPort: 8080
