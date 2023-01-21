@@ -4,8 +4,9 @@ resources:
 - deployment.yml
 - service.yml
 
-namespace: appgo 
+namespace: appgo
 
 images:
-- name: 0xdutra/argo-appgo 
-  newTag: v1
+- name: 0xdutra/argo-appgo
+  newName: 0xdutra/argo-appgo
+  newTag: 70b51518b2c255a1b2be8d64b2d4f15ef560649e
