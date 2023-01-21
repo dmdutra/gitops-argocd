@@ -28,3 +28,33 @@ jobs:
           push: true
           tags: 0xdutra/argo-appgo:${{ github.sha }}, 0xdutra/argo-appgo:latest
 
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          kustomize_version: v4.5.6
+      
+      - name: update k8s
+        run: |
+          cd k8s
+          kustomize edit set image 0xdutra/argo-appgo=0xdutra/argo-appgo:${{ github.sha }}
+          cat kustomization.yml
+
+      - name: git commit
+        run: |
+          git config --local user.email "0xdutra@gmail.com"
+          git config --local user.name "0xdutra"
+          git commit -am "chore: change image tag"
+
+      - name: git push
+        uses: ad-m/github-push-action@master
+
+    needs: [build]
+
+
