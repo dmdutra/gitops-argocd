@@ -5,6 +5,7 @@ metadata:
   labels:
     app: argo-appgo
 spec:
+  replicas: 10
   selector:
     matchLabels:
       app: argo-appgo
