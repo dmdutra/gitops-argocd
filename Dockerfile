@@ -1,14 +1,13 @@
-FROM golang as build
-
+FROM golang:1.19 AS build
 WORKDIR /app
-COPY . .
+COPY . /app
+RUN CGO_ENABLED=0 GOOS=linux go build -o api main.go
 
-RUN CGO_ENANLED=0 go build -o server main.go
-
-FROM alpine:3.14
+# stage imagem final
+FROM scratch
 WORKDIR /app
 
-COPY --from=build /app/server .
+COPY --from=build /app/api ./
+EXPOSE 8080
 
-CMD ["./server"]
-
+CMD [ "./api" ]
